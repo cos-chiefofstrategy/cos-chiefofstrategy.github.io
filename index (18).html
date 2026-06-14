@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>COS — The AI front desk for clinics | Every enquiry answered in under 60 seconds</title>
+<meta name="description" content="COS installs an AI front desk for aesthetic and med-spa clinics in the UK & Ireland: every enquiry answered in under 60 seconds, qualified, and booked — 24/7. Live in 14 days." />
+
+<!-- ===================================================================
+     COS — one-page site (self-contained, free, GitHub Pages ready)
+     -------------------------------------------------------------------
+     DEPLOY (free, ~5 min):
+       1. Create a NEW GitHub account as the BRAND, e.g. "getcos" or
+          "cos-systems" — NOT your personal account (the repo URL is public).
+       2. New PUBLIC repository named  <brand>.github.io  (e.g. getcos.github.io)
+       3. Upload this file as  index.html  (root of the repo) → Commit.
+       4. Settings → Pages → Source: "Deploy from a branch" → main / root → Save.
+       5. Live in a few minutes at  https://<brand>.github.io  (HTTPS automatic).
+
+     FILL THESE PLACEHOLDERS (Find & Replace before deploying):
+       {{WHATSAPP}}     full intl number, digits only, e.g. 447700900123
+       {{YT_ID}}        unlisted YouTube video ID for the demo (e.g. dQw4w9WgXcQ)
+       {{EMAIL}}        brand Gmail, e.g. cos.frontdesk@gmail.com
+       {{FORM_URL}}     OPTIONAL free Google Form link for the teardown (else WhatsApp)
+
+     PRIVACY: no founder name, face, or employer anywhere. Brand-fronted only.
+=================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#F5F2EC;          /* porcelain */
+    --panel:#FBFAF6;       /* lighter card */
+    --ink:#191A1E;         /* near-black text */
+    --night:#14161B;       /* after-hours dark band */
+    --night-2:#1D2128;     /* dark card */
+    --gold:#C29A45;        /* "the light's still on" accent */
+    --gold-soft:#E7D7AE;
+    --mute:#7C766B;        /* taupe-grey secondary text */
+    --line:#E4DDD0;        /* hairline on light */
+    --line-d:#2A2E36;      /* hairline on dark */
+    --green:#3F7D5B;       /* booked / confirm */
+    --maxw:1080px;
+    --r:16px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Hanken Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:18px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif;font-weight:700;line-height:1.05;margin:0;letter-spacing:-0.02em}
+  p{margin:0}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:inherit;font-weight:600;font-size:16px;
+       padding:14px 22px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;
+       transition:transform .15s ease, box-shadow .15s ease, background .15s ease}
+  .btn-gold{background:var(--gold);color:#1c1607;box-shadow:0 8px 22px -10px rgba(194,154,69,.7)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(194,154,69,.8)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--bg)}
+  .btn-light{background:var(--bg);color:var(--ink)}
+  .btn-light:hover{transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(245,242,236,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em;text-decoration:none}
+  .brand .dot{color:var(--gold)}
+  .nav .tag{font-size:13px;color:var(--mute);margin-left:10px;font-weight:500}
+  .nav-cta{font-size:15px;padding:10px 18px}
+  @media(max-width:640px){.nav .tag{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 30px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+  .hero h1{font-size:clamp(34px,5.2vw,58px);margin:18px 0 0}
+  .hero h1 .em{color:var(--gold);font-style:italic;font-weight:600}
+  .hero .sub{font-size:clamp(17px,2.2vw,20px);color:var(--mute);margin-top:20px;max-width:30ch}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .hero-note{font-size:14px;color:var(--mute);margin-top:16px}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero{padding:40px 0 10px}}
+
+  /* ---------- phone (after-hours signature) ---------- */
+  .phone{background:var(--night);border-radius:30px;padding:18px 16px 20px;max-width:340px;margin:0 auto;
+         box-shadow:0 30px 60px -24px rgba(20,22,27,.55);border:1px solid var(--line-d);position:relative;overflow:hidden}
+  .phone::before{content:"";position:absolute;top:0;left:0;right:0;height:120px;
+                 background:radial-gradient(120px 90px at 78% 0%, rgba(194,154,69,.22), transparent 70%)}
+  .phone-top{display:flex;align-items:center;justify-content:space-between;color:#cfd3da;font-size:12px;position:relative}
+  .phone-clinic{display:flex;align-items:center;gap:9px;margin:12px 2px 14px;position:relative}
+  .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8a6e2c);flex:0 0 auto}
+  .phone-clinic b{color:#fff;font-family:"Bricolage Grotesque",sans-serif;font-size:15px}
+  .phone-clinic span{color:#8b919b;font-size:12px;display:block}
+  .timer{position:absolute;right:2px;top:0;background:var(--night-2);color:var(--gold);font-size:12px;font-weight:600;
+          padding:4px 9px;border-radius:999px;border:1px solid var(--line-d)}
+  .chat{display:flex;flex-direction:column;gap:9px;min-height:300px;position:relative}
+  .msg{max-width:82%;padding:9px 12px;border-radius:14px;font-size:13.5px;line-height:1.42;opacity:0;transform:translateY(6px);
+       transition:opacity .4s ease,transform .4s ease}
+  .msg.in{align-self:flex-start;background:#262b33;color:#e7e9ee;border-bottom-left-radius:4px}
+  .msg.out{align-self:flex-end;background:#2f5b43;color:#eafff2;border-bottom-right-radius:4px}
+  .msg.show{opacity:1;transform:none}
+  .stamp{align-self:center;display:flex;align-items:center;gap:7px;background:rgba(63,125,91,.16);color:#7fd3a4;
+         font-size:12px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid rgba(63,125,91,.4);
+         opacity:0;transform:scale(.9);transition:.4s ease}
+  .stamp.show{opacity:1;transform:none}
+  .calcard{background:#20252d;border:1px solid var(--line-d);border-radius:12px;padding:10px 12px;color:#dfe3ea;font-size:12.5px;
+           align-self:flex-end;max-width:82%;opacity:0;transform:translateY(6px);transition:.4s ease}
+  .calcard.show{opacity:1;transform:none}
+  .calcard .d{color:var(--gold);font-weight:600}
+  .illus{position:absolute;left:8px;bottom:6px;font-size:10px;color:#5b616b;letter-spacing:.06em}
+
+  /* ---------- trust strip ---------- */
+  .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+  .trust-row{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:center;align-items:center;padding:18px 0;
+             font-size:14px;color:var(--mute);font-weight:500}
+  .trust-row b{color:var(--ink);font-weight:600}
+  .trust-row .sep{color:var(--line);}
+  @media(max-width:640px){.trust-row .sep{display:none}.trust-row{gap:6px 0;flex-direction:column}}
+
+  /* ---------- generic section ---------- */
+  .sec{padding:72px 0}
+  .sec-head{max-width:34ch;margin-bottom:40px}
+  .sec-head h2{font-size:clamp(27px,3.6vw,40px);margin-top:12px}
+  .sec-head p{color:var(--mute);margin-top:14px;font-size:17px}
+
+  /* ---------- cost stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px}
+  .stat .big{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(38px,5vw,52px);
+             letter-spacing:-.03em;color:var(--ink);line-height:1}
+  .stat .lab{margin-top:10px;font-size:15.5px;color:var(--ink);font-weight:500}
+  .stat .src{margin-top:14px;font-size:12px;color:var(--mute)}
+  .stat .src a{color:var(--mute)}
+  @media(max-width:760px){.stats{grid-template-columns:1fr}}
+
+  /* ---------- demo band (dark) ---------- */
+  .demo{background:var(--night);color:#f1f0ec}
+  .demo .eyebrow{color:var(--gold-soft)}
+  .demo h2{color:#fff}
+  .demo p.lead{color:#b9bdc6;margin-top:14px;max-width:46ch}
+  .video{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;margin-top:34px;
+         border:1px solid var(--line-d);background:#0e1014}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+                  gap:14px;text-align:center;color:#aab0ba;padding:20px}
+  .video-fallback .play{width:64px;height:64px;border-radius:50%;background:var(--gold);display:grid;place-items:center}
+  .video-fallback .play::after{content:"";border-left:18px solid #1c1607;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px}
+
+  /* ---------- how it works ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:step}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;position:relative}
+  .step .n{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:14px;color:var(--gold);letter-spacing:.06em}
+  .step h3{font-size:19px;margin-top:8px}
+  .step p{color:var(--mute);font-size:15px;margin-top:8px}
+  @media(max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+  /* ---------- offer / guarantee ---------- */
+  .offer{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:46px 40px;
+         display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center}
+  .offer h2{font-size:clamp(26px,3.4vw,38px)}
+  .offer p{color:var(--mute);margin-top:14px;max-width:42ch}
+  .guarantee{background:var(--ink);color:var(--bg);border-radius:18px;padding:28px;text-align:center}
+  .guarantee .g-big{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:21px;line-height:1.15}
+  .guarantee .g-sub{color:#b9b4a8;font-size:14px;margin-top:12px}
+  @media(max-width:780px){.offer{grid-template-columns:1fr;padding:34px 26px}}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{background:linear-gradient(135deg,#1a1c22,#23282f);color:#fff;border-radius:24px;padding:50px 44px;text-align:center;position:relative;overflow:hidden}
+  .cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 220px at 50% -10%,rgba(194,154,69,.18),transparent 70%)}
+  .cta-band h2{font-size:clamp(28px,4vw,42px);position:relative}
+  .cta-band p{color:#c4c8d0;margin:16px auto 0;max-width:48ch;position:relative}
+  .cta-band .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px;position:relative}
+  .cta-band small{display:block;color:#8b919b;font-size:13px;margin-top:18px;position:relative}
+
+  /* ---------- FAQ ---------- */
+  .faq{display:grid;grid-template-columns:1fr 1fr;gap:14px 30px}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:4px 20px}
+  summary{cursor:pointer;font-weight:600;font-size:17px;padding:16px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:22px;color:var(--gold);font-weight:400;transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--mute);font-size:15.5px;padding:0 0 18px}
+  @media(max-width:700px){.faq{grid-template-columns:1fr}}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:40px 0;margin-top:20px}
+  .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+  .foot .brand{font-size:20px}
+  .foot p{color:var(--mute);font-size:13.5px;max-width:46ch;margin-top:10px}
+  .foot a.link{color:var(--ink);font-size:14px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+  .foot a.link:hover{border-color:var(--ink)}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap}
+
+  @media(prefers-reduced-motion:reduce){
+    .msg,.stamp,.calcard{transition:none !important;opacity:1 !important;transform:none !important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-row">
+    <div>
+      <a href="#top" class="brand">COS<span class="dot">.</span></a>
+      <span class="tag">AI front desk for clinics</span>
+    </div>
+    <a class="btn btn-ghost nav-cta" href="https://wa.me/{{WHATSAPP}}?text=Hi%20COS%20%E2%80%94%20I%27d%20like%20the%20free%20teardown%20of%20my%20clinic%27s%20enquiry%20flow.">Free teardown</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">For aesthetic &amp; med-spa clinics · UK &amp; Ireland</span>
+      <h1>Your front desk is closed.<br>The bookings <span class="em">aren't.</span></h1>
+      <p class="sub">An AI front desk that answers every enquiry in under 60 seconds, qualifies it, and books the consultation — 24/7.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="https://wa.me/{{WHATSAPP}}?text=Hi%20COS%20%E2%80%94%20I%27d%20like%20the%20free%20teardown%20of%20my%20clinic%27s%20enquiry%20flow.">Get my free teardown →</a>
+        <a class="btn btn-ghost" href="#demo">Watch the 60-sec demo</a>
+      </div>
+      <p class="hero-note">Live in 14 days, or you don't pay the second half.</p>
+    </div>
+
+    <!-- signature: the after-hours phone -->
+    <div>
+      <div class="phone" id="phone" aria-label="Demonstration: an after-hours enquiry answered and booked automatically">
+        <div class="phone-top"><span>21:04</span><span>•••</span></div>
+        <div class="phone-clinic">
+          <div class="avatar" aria-hidden="true"></div>
+          <div><b>Aurelia Skin &amp; Aesthetics</b><span>Closed · opens 9:00am</span></div>
+          <div class="timer" id="timer">0:00</div>
+        </div>
+        <div class="chat" id="chat">
+          <div class="msg in" data-step="1">Hi, how much is lip filler? Any slots this week?</div>
+          <div class="msg out" data-step="2">Hi! Thanks for messaging Aurelia ✨ Lip filler starts from £180 — the exact plan's set at a quick consultation. Have you had filler before?</div>
+          <div class="msg out" data-step="3">I can hold a slot — Thurs 6:15pm or Sat 10:30am work?</div>
+          <div class="msg in" data-step="4">Saturday please 🙌</div>
+          <div class="calcard" data-step="5"><span class="d">Sat 10:30am</span> · Consultation booked with Aurelia. Reminder set for Friday.</div>
+          <div class="stamp" data-step="6">● Consultation booked — 0:41</div>
+        </div>
+        <span class="illus">Illustrative demo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<div class="trust">
+  <div class="wrap trust-row">
+    <span><b>GDPR/DPA-ready</b></span><span class="sep">·</span>
+    <span><b>EU Standard Contractual Clauses</b></span><span class="sep">·</span>
+    <span><b>Patient data kept off public AI</b></span><span class="sep">·</span>
+    <span>Based in South Africa, <b>serving UK &amp; Ireland</b></span>
+  </div>
+</div>
+
+<!-- ============ THE COST OF SLOW REPLIES ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Why it matters</span>
+      <h2>Most clinics lose the enquiry before they ever read it.</h2>
+      <p>Injectable, laser and skin enquiries land on Instagram and your website at all hours. When the reply comes the next morning, the booking's usually gone — to whoever answered first.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="big">78%</div>
+        <div class="lab">of customers book with the business that <b>replies first</b> — not the cheapest.</div>
+        <div class="src">Source: Lead Response Management / HBR studies</div>
+      </div>
+      <div class="stat">
+        <div class="big">21×</div>
+        <div class="lab">more likely to qualify an enquiry when you answer within <b>5 minutes</b> vs 30.</div>
+        <div class="src">Source: MIT / InsideSales (Oldroyd)</div>
+      </div>
+      <div class="stat">
+        <div class="big">40+ hrs</div>
+        <div class="lab">average reply time across businesses — and over half of enquiries <b>never get a reply at all.</b></div>
+        <div class="src">Source: aggregated lead-response studies, 2024–26</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO ============ -->
+<section class="sec demo" id="demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">See it work</span>
+      <h2>One after-hours enquiry, answered and booked.</h2>
+      <p class="lead">Sixty seconds: a 9pm message replied to instantly, qualified, booked into the calendar, with a reminder set to kill the no-show.</p>
+    </div>
+    <div class="video">
+      <!-- Replace {{YT_ID}} with your unlisted YouTube video ID. Until then the fallback shows. -->
+      <iframe id="ytembed" src="https://www.youtube-nocookie.com/embed/{{YT_ID}}" title="COS AI front desk — 60-second demo" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-fallback" id="ytfallback">
+        <div class="play" aria-hidden="true"></div>
+        <div>The 60-second demo lands here.<br><small style="color:#7c828c">(Paste your unlisted YouTube ID into the page to go live.)</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2>One quiet system, six steps — running on your existing channels.</h2>
+      <p>It plugs into WhatsApp, your website form, Instagram DMs and your calendar. No new apps for your team to learn.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">STEP 01</div><h3>Catches it</h3><p>Picks up every enquiry from WhatsApp, your site form, IG and phone — the moment it lands.</p></div>
+      <div class="step"><div class="n">STEP 02</div><h3>Replies in seconds</h3><p>A warm, on-brand reply in under 60 seconds, day or night, with your price ranges.</p></div>
+      <div class="step"><div class="n">STEP 03</div><h3>Qualifies</h3><p>Asks the right questions, screens out tyre-kickers, flags anything clinical for you.</p></div>
+      <div class="step"><div class="n">STEP 04</div><h3>Books the slot</h3><p>Offers real openings and writes the consultation straight into your calendar.</p></div>
+      <div class="step"><div class="n">STEP 05</div><h3>Reminds</h3><p>Sends a day-before reminder so your high-value slots don't no-show.</p></div>
+      <div class="step"><div class="n">STEP 06</div><h3>Logs &amp; escalates</h3><p>Every enquiry recorded; anything sensitive or unusual handed to a human, your rules.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OFFER / GUARANTEE ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="offer">
+      <div>
+        <span class="eyebrow">The build</span>
+        <h2>Installed and working in 14 days.</h2>
+        <p>We map your enquiry flow, build the system on your channels, tune it for two weeks, and hand it over. You see exactly what it'll do before you commit a thing — that's what the free teardown is for.</p>
+        <div class="hero-cta" style="margin-top:26px">
+          <a class="btn btn-gold" href="https://wa.me/{{WHATSAPP}}?text=Hi%20COS%20%E2%80%94%20I%27d%20like%20the%20free%20teardown%20of%20my%20clinic%27s%20enquiry%20flow.">Start with the free teardown</a>
+        </div>
+      </div>
+      <div class="guarantee">
+        <div class="g-big">First automation live and working in 14 days — or you don't pay the second half.</div>
+        <div class="g-sub">No long contract to find out if it works. The risk sits with us, not you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>See where your clinic is losing bookings.</h2>
+      <p>Send us how enquiries reach you today. You'll get a free 4-minute teardown showing exactly where bookings slip — and what an AI front desk would catch. No pitch.</p>
+      <div class="row">
+        <a class="btn btn-gold" href="https://wa.me/{{WHATSAPP}}?text=Hi%20COS%20%E2%80%94%20I%27d%20like%20the%20free%20teardown%20of%20my%20clinic%27s%20enquiry%20flow.">Message us on WhatsApp</a>
+        <a class="btn btn-light" href="mailto:{{EMAIL}}?subject=Free%20clinic%20teardown">Or email us</a>
+      </div>
+      <small>Reply STOP to any message and you won't hear from us again.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec" style="padding-top:24px">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Good to know</span><h2>The questions clinics ask first.</h2></div>
+    <div class="faq">
+      <details><summary>Is the teardown really free?</summary><p>Yes. You tell us how enquiries reach you now; we send back a short, specific teardown of where bookings are slipping. If it's useful, we talk about building it. If not, you keep the teardown.</p></details>
+      <details><summary>What happens to our patients' data?</summary><p>Aesthetic enquiries are health data, so we treat them that way. Anything with personal detail is processed on a private model — never a public AI tool that could train on it. We sign a Data Processing Agreement and EU Standard Contractual Clauses before anything goes live.</p></details>
+      <details><summary>Do we have to install or learn anything?</summary><p>No new app for your team. It runs on the channels you already use — WhatsApp, your website form, Instagram, your calendar — and hands anything sensitive straight to a human on your rules.</p></details>
+      <details><summary>Where are you based?</summary><p>We're a remote AI systems studio based in South Africa, working with clinics across the UK and Ireland. We operate as a GDPR-compliant data processor, with the full data agreement pack in place before go-live.</p></details>
+      <details><summary>Won't it sound robotic to our patients?</summary><p>It's tuned to your tone and your treatments, gives price ranges rather than hard quotes, and books a consultation — exactly how your best front-of-house would handle it. You approve the wording before it ever talks to a patient.</p></details>
+      <details><summary>What if it's wrong about something?</summary><p>It escalates. Clinical questions, complaints, or anything outside its rules get flagged to a human. You stay in control; it just stops the easy bookings from slipping away at 9pm.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a href="#top" class="brand">COS<span class="dot">.</span></a>
+      <p>AI front desk systems for aesthetic &amp; med-spa clinics. Operating as a GDPR-compliant data processor — DPA + EU Standard Contractual Clauses signed before go-live.</p>
+      <p style="margin-top:6px">© 2026 COS. All rights reserved.</p>
+    </div>
+    <div class="foot-links">
+      <a class="link" href="https://wa.me/{{WHATSAPP}}?text=Hi%20COS">WhatsApp</a>
+      <a class="link" href="mailto:{{EMAIL}}">Email</a>
+      <a class="link" href="#demo">Watch the demo</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal the after-hours chat in sequence (respects reduced-motion via CSS fallback).
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var phone = document.getElementById('phone');
+    var timerEl = document.getElementById('timer');
+    var steps = Array.prototype.slice.call(document.querySelectorAll('#chat [data-step]'));
+    var played = false;
+
+    function tickTimer(to, done){
+      var s = 0; timerEl.textContent = '0:00';
+      var id = setInterval(function(){
+        s++; timerEl.textContent = '0:' + (s<10?'0':'') + s;
+        if(s>=to){ clearInterval(id); done&&done(); }
+      }, 28);
+    }
+
+    function play(){
+      if(played) return; played = true;
+      if(reduce){ steps.forEach(function(el){el.classList.add('show')}); timerEl.textContent='0:41'; return; }
+      var delays = [300, 1500, 2600, 3700, 4700, 5500];
+      steps.forEach(function(el,i){ setTimeout(function(){ el.classList.add('show'); }, delays[i]); });
+      setTimeout(function(){ tickTimer(41); }, 300);
+    }
+
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); }});
+      }, {threshold:.4});
+      io.observe(phone);
+    } else { play(); }
+
+    // Hide the demo fallback only once a real YouTube ID is present.
+    var id = "{{YT_ID}}";
+    if(id && id.indexOf('{{') === -1){
+      var fb = document.getElementById('ytfallback'); if(fb) fb.style.display='none';
+    } else {
+      var fr = document.getElementById('ytembed'); if(fr) fr.style.display='none';
+    }
+  })();
+</script>
+</body>
+</html>
